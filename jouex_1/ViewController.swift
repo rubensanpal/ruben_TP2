@@ -4,6 +4,7 @@ import UIKit
 class ViewController: UIViewController {
 //====================
     
+            //Contection avec des éléments
     @IBOutlet weak var back_1: UIView!
     @IBOutlet weak var front_1: UIView!
     @IBOutlet weak var back_2: UIView!
@@ -45,7 +46,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var back_20: UIView!
     @IBOutlet weak var front_20: UIView!
         
-    
+            //Conection des images
     @IBOutlet weak var imgView1: UIImageView!
     @IBOutlet weak var imgView2: UIImageView!
     @IBOutlet weak var imgView3: UIImageView!
@@ -67,8 +68,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var imgView19: UIImageView!
     @IBOutlet weak var imgView20: UIImageView!
     
-    
-   
+            //Conection des carts
     @IBOutlet weak var card_01: UIView!
     @IBOutlet weak var card_02: UIView!
     @IBOutlet weak var card_03: UIView!
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var card_19: UIView!
     @IBOutlet weak var card_20: UIView!
    
-
+            //Création des variables
     var cards: [UIView]!
     var arrayOfImageViews: [UIImageView]!
     var arrayOfAnimalNames: [String] = ["mono.png",
@@ -121,14 +121,25 @@ class ViewController: UIViewController {
     var arrayOfHidingFronts = [UIView] ()
     
     //====================
+            //Regarder des images
     override func viewDidLoad() {
         super.viewDidLoad()
-        cards = [card_01, card_02, card_03, card_04, card_05, card_06, card_07, card_08, card_09, card_10, card_11, card_12, card_13, card_14, card_15, card_16, card_17, card_18, card_19, card_20]
-        arrayOfImageViews = [imgView1, imgView2, imgView3, imgView4, imgView5, imgView6, imgView7, imgView8, imgView9, imgView10, imgView11, imgView12, imgView13, imgView14, imgView15, imgView16, imgView17, imgView18, imgView19, imgView20]
+        cards = [card_01, card_02, card_03, card_04, card_05,
+                 card_06, card_07, card_08, card_09, card_10,
+                 card_11, card_12, card_13, card_14, card_15,
+                 card_16, card_17, card_18, card_19, card_20]
+        
+        arrayOfImageViews = [imgView1, imgView2, imgView3, imgView4,
+                             imgView5, imgView6, imgView7, imgView8,
+                             imgView9, imgView10, imgView11, imgView12,
+                             imgView13, imgView14, imgView15, imgView16,
+                             imgView17, imgView18, imgView19, imgView20]
         randomAnimalNames()
         setImagesToCard()
     }
+
     //====================
+            //Action de chaque carte
     @IBAction func showCard(_ sender: UIButton) {
         
         if arrayOfHidingFronts.count == 2 {
@@ -262,7 +273,9 @@ class ViewController: UIViewController {
         }
         verification()
     }
+
     //====================
+            // funtion pour relancer
     func resetCards() {
         if arrayOfShowingBacks.count == 2 {
             Timer.scheduledTimer(timeInterval: 2,
@@ -272,7 +285,9 @@ class ViewController: UIViewController {
                                  repeats: false)
         }
     }
+
     //====================
+            // funtion par retourner des cartes
     func reflip () {
         for index in 0..<arrayOfShowingBacks.count {
             flipCard(from: arrayOfShowingBacks[index], to: arrayOfHidingFronts[index])
@@ -280,7 +295,9 @@ class ViewController: UIViewController {
         arrayOfHidingFronts = []
         arrayOfShowingBacks = []
     }
+
     //====================
+            // funtion par tourner des cartes
     func flipCard(from: UIView, to: UIView) {
         let transitionOptions: UIViewAnimationOptions =
             [.transitionFlipFromRight, .showHideTransitionViews]
@@ -295,7 +312,9 @@ class ViewController: UIViewController {
                             to.isHidden = false
         })
     }
+
     //====================
+            // funtion par sectioner des images
     func setImagesToCard () {
         var number = 0
         for imgView in arrayOfImageViews {
@@ -303,7 +322,9 @@ class ViewController: UIViewController {
             number = number + 1
         }
     }
+
     //====================
+            // funtion pour mélanger des cartes
     func randomAnimalNames() {
         let numbreOfAnimals = arrayOfAnimalNames.count
         
@@ -313,7 +334,9 @@ class ViewController: UIViewController {
             arrayOfAnimalNames.remove(at: randomNumber)
         }
     }
+
     //====================
+            // funtion pour vider le section correcte
     func verification() {
         if arrayChosenCards.count == 2 {
             if arrayChosenCards[0] == arrayChosenCards[1] {
@@ -326,19 +349,21 @@ class ViewController: UIViewController {
 
                 arrayChosenWiew = []
             }
-
             arrayChosenCards = []
         }
-
         resetCards()
     }
+
     //====================
+            // funtion pour cacher des couples
     @objc func hideCards() {    //le @objc func est par le nouveau version de xcode
         arrayChosenWiew[0].isHidden = true
         arrayChosenWiew[1].isHidden = true
         arrayChosenWiew = []
     }
+
     //====================
+            // action en bouton et funtion par relancer
     @IBAction func reset(_ sender: UIButton) {
         for card in cards {
             card.isHidden = false
@@ -367,7 +392,7 @@ class ViewController: UIViewController {
         randomAnimalNames()
         setImagesToCard()
     }
+
     //====================
-   
 }
 
